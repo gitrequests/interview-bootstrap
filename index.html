@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Task</title>
+
+    <style>
+        .task__list li {
+            margin-bottom: 1rem;
+        }
+
+        .task__img {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .task__img--fluid {
+            max-width: 100%;
+        }
+
+        body {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Тестовое задание</h1>
+
+    <p>
+        Задание должно быть выполнено на фреймворке <a href="https://getbootstrap.com/docs/5.3/" target="_blank">Bootstrap 5</a>.<br>
+        Для того, что бы показать ваш уровень владения данным фрейворком - старайтесь использовать стили из Bootstrap 5.<br>
+        Можно переопределять SCSS переменные из bootstrap <a href="https://getbootstrap.com/docs/5.3/customize/sass/" target="_blank">как указано в документации</a>.<br><br>
+        <small><em>Для понимания: пример задания, которое вы будете делать, не содержит ни одной строчки стилей, только Bootstrap (и несколько Bootstrap SCSS переменных переопределены).</em></small>
+    </p>
+
+    <hr>
+
+    <h2>Общие сведения и макеты</h2>
+
+    <ul>
+        <li>
+            <a href="./assets/desktop.webp" target="_blank">
+                Десктоп версия проекта
+            </a>
+        </li>
+        <li>
+            <a href="./assets/mobile.webp" target="_blank">
+                Мобильная версия проекта
+            </a>
+        </li>
+        <li>
+            <a href="./assets/preview.webm" target="_blank">
+                Видео с функционалом проекта
+            </a>
+        </li>
+    </ul>
+
+    <h2>Ассеты для проекта</h2>
+
+    <ul>
+        <li>
+            <a href="./assets/image.webp" target="_blank">
+                Изображение для карточки
+            </a>
+        </li>
+        <li>
+            <a href="./assets/video.mp4" target="_blank">
+                Видео для главного блока
+            </a>
+        </li>
+    </ul>
+
+    <hr>
+
+    <h2>Работа над проектом</h2>
+
+    <form id="taskForm">
+        <ol class="task__list">
+            <li>
+                <label>
+                    <input type="checkbox">
+                    Создать проект <a href="https://getbootstrap.com/docs/5.3/getting-started/webpack/" target="_blank">Bootstrap + Webpack как в документации</a> (исправить возникшие проблемы).
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox">
+                    <b>NAVBAR</b>
+                    Создать блок навигации как в макете.
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox">
+                    Реализовать функционал мобильного меню (в мобильном меню ссылки должны показываться при нажатии на кнопку). <small><em>Использовать для этого желательно только компоненты Bootstrap.</em></small>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox">
+                    <b>HOME</b>
+                    Создать главный блок как в макете. Высота главного блока должна равняться высоте экрана (viewport).
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox">
+                    В качестве фона поставить видео в теге "video".
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox">
+                    Сделать затемнение фона с видео, не забываем, <small><em>что желательно использовать только классы bootstrap.</em></small>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox">
+                    Расположить текстовые элементы и кнопку как в макете.
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox">
+                    <b>HEADER</b>
+                    Создать блок с заголовком "Каталог".
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox">
+                    <b>CATALOG</b>
+                    Создать блок с карточками.
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox">
+                    Выровнять карточки по высоте, если в одной из них контента больше. Кнопка "Купить" при этом должна быть внизу карточки.
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox">
+                    <b>DEPLOY</b>
+                    Внести изменения в систему контроля версий (git).
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox">
+                    Разместить репозиторий на github.
+                </label>
+            </li>
+            <li>
+                <b>Отправить ссылку на репозиторий для проверки.</b>
+            </li>
+        </ol>
+    </form>
+
+    <h2 id="taskDone" data-text="Готово? Чего же вы ждёте? Скорее отправляйте нам результат! Удачи:)"></h2>
+
+    <h2>Бонус</h2>
+
+    <ul>
+        <li>
+            Разместите проект в интернете и отправьте ссылку на него (Github Pages или любой другой сервис).
+        </li>
+    </ul>
+
+    <script>
+        const onDomLoaded = () => {
+            const form = document.getElementById('taskForm')
+            const inputNodeList = getInputElementsFromForm(form)
+            restoreProgressFromStorage(inputNodeList)
+            handleTaskProgress()
+            form.addEventListener('change', () => {
+                saveProgressToStorage(inputNodeList)
+                handleTaskProgress()
+            })
+        }
+
+        /**
+         * @param {Node} form
+         * @return {NodeList}
+         */
+        const getInputElementsFromForm = form => {
+            return form.querySelectorAll('input[type="checkbox"]')
+        }
+
+        /**
+         * @param {NodeList} inputNodeList 
+         */
+        const saveProgressToStorage = inputNodeList => {
+            const progressData = [].map.call(inputNodeList, node => node.checked)
+            localStorage.setItem('progress', JSON.stringify(progressData))
+        }
+
+        /**
+         * @param {NodeList} inputNodeList 
+         */
+        const restoreProgressFromStorage = inputNodeList => {
+            const progressData = JSON.parse(localStorage.getItem('progress')) || []
+            if (progressData.length === inputNodeList.length) {
+                progressData.forEach((isChecked, id) => {
+                    inputNodeList[id].checked = isChecked
+                })
+            }
+        }
+
+        /**
+         * Displays a message if the progress is complete
+         */
+        const handleTaskProgress = () => {
+            const progressData = JSON.parse(localStorage.getItem('progress')) || []
+            const progress = progressData.filter(bool => bool)
+            const taskDoneNode = document.getElementById('taskDone')
+            taskDoneNode.textContent = (progressData.length && progressData.length === progress.length) ? taskDoneNode.dataset.text : ''
+        }
+
+        document.addEventListener('DOMContentLoaded', onDomLoaded)
+    </script>
+</body>
+
+</html>
